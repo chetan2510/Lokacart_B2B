@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <link href="styling.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div id="header"></div>
+        
+        <br><br>
+        
+    <center><h3  style="color: #4EAE4D">PROFILE</h3></center><br><br>
+    <center><img src="profileimg.jpg" class="img-circle" width="130" height="130"></center>
+    <br><br><br>
+    <center><input type="button" id="b6" value="Edit Profile"/></center>
+    <br><br>
+    <div class="container" style="margin-left: 180px;margin-top: 57px">
+        <div class="row">
+        <div class="col-sm-6">
+            <h5>First Name</h5>
+             <input type="text"  id="pro1"  required/>
+        </div>
+            <div class="col-sm-6">
+                <h5>Last Name</h5>
+             <input type="text"  id="pro2"  required/>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+        <div class="col-sm-12">
+            <h5>Address</h5>
+             <input type="text" style="width: 951px;height: 60px" id="pro3"  required/>
+        </div>
+        </div>
+            <br><br>
+          <div class="row">
+        <div class="col-sm-6">
+            <h5>Pincode</h5>
+             <input type="number"  id="pro4"  required/>
+        </div>
+            <div class="col-sm-6">
+                <h5>E-mail</h5>
+             <input type="text"  id="pro5"  required/>
+            </div>
+        </div>  
+           
+    </div>
+    
+        <div id="footer"></div>
+        
+        
+        
+        
+<script>
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+ </script>
+    </body>
+</html>

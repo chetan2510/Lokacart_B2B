@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>FRUITS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="styling.css" rel="stylesheet" type="text/css"/>
+        <style>
+            
+            .whiteplus {
+             color: #fff;
+             }
+            
+        </style>
+    </head>
+    <body style="overflow: hidden">
+        <div id="header"></div>
+         
+        <div class="container">
+               
+            <div class="row">
+                
+                 <div>
+                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3   " id="placeholder1"></div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 " id="placeholder2"></div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3" id="placeholder3"></div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3" id="placeholder4"></div>
+                
+                 </div><br><br>
+        </div>
+            </div>
+
+        <div id="footer"></div>
+
+    <script>
+    
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");        
+    
+    function go(id)
+            {
+                
+                var value = document.getElementById("lb" + id).textContent;        
+                var kg = document.getElementById("kg" + id).textContent;        
+                if(sessionStorage.length==0)
+                {
+                    var cart=[];
+                    cart.push(id);
+                    var count=1;
+                    var addpro=[];
+                  sessionStorage.cart = JSON.stringify(cart);
+                  sessionStorage.count = JSON.stringify(count);
+                  sessionStorage.addpro = JSON.stringify(addpro);
+                 
+                }
+                else
+                {
+                    var k,j;
+                    var cart = JSON.parse(sessionStorage.cart) || [];
+                    var count = JSON.parse(sessionStorage.count) || [];
+                    var addpro = JSON.parse(sessionStorage.addpro) || [];
+                    cart.push(id);
+                    if(cart.length ==1)
+                    {
+                       count=1;
+                    sessionStorage.count = JSON.stringify(count);        
+                    }
+                    var products =[];
+                     sessionStorage.products = JSON.stringify(products);
+                    var flag;
+                    var id2 = cart[0];
+                products.push(id2);
+                  for (var i = 0; i < cart.length; i++)
+                {
+                    flag = true;
+                    id = cart[i];
+                    for (j = 0; j < products.length; j++)
+                    {
+
+                        if (cart[i] == products[j])
+                        {
+
+                            flag = false;
+                            break;
+                        }
+                    }
+
+                    if (flag == true)
+                    {
+                        products.push(id);
+                    }
+                    sessionStorage.products = JSON.stringify(products);
+                }
+                count=products.length;
+                        
+                        sessionStorage.count = JSON.stringify(count);
+                        var addpro =[];
+                        sessionStorage.addpro = JSON.stringify(addpro);
+                        
+                         for (var i = 0; i < products.length; i++)
+                {
+                     
+                 var num=0;
+                    for (j = 0; j < cart.length; j++)
+                    {
+
+                        if (cart[j] == products[i])
+                        {
+                               num++;
+                        }
+                    }
+                       addpro.push(num);
+                   
+                     sessionStorage.addpro = JSON.stringify(addpro);
+                }
+                        
+                        
+                        
+                  }
+                  var count = JSON.parse(sessionStorage.count) || [];
+                         if(count !=0)
+                         {
+                             document.getElementById("count").innerHTML = count;
+                         }
+                  sessionStorage.cart = JSON.stringify(cart);
+                value++;
+                document.getElementById("lb" + id).innerHTML = value;
+                var loading = document.getElementById(id);
+                loading.style.visibility = "visible";
+                var loading1 = document.getElementById("lb" + id);
+                loading1.style.visibility = "visible";
+                  var loading3 = document.getElementById("kg" + id);
+                loading3.style.visibility = "visible";
+            }
+
+            function go2(id)
+            {
+                var value = document.getElementById("lb" + id).textContent;
+                var kg=document.getElementById("kg"+id);
+                 var cart = JSON.parse(sessionStorage.cart) || [];
+                 var index = cart.indexOf(id);
+                 cart.splice(index,1);
+                 console.log(cart);
+                  sessionStorage.cart = JSON.stringify(cart);
+                value--;
+                if (value == 24)
+                {
+                    var count = JSON.parse(sessionStorage.count) || [];
+                    count--;
+                    sessionStorage.cart = JSON.stringify(cart);
+                    document.getElementById("count").innerHTML = count;
+                    sessionStorage.count = JSON.stringify(count);
+                    var loading = document.getElementById(id);
+                    loading.style.visibility = "hidden";
+                    var loading1 = document.getElementById("lb" + id);
+                    var loading2 = document.getElementById("kg" + id);
+                    loading1.style.visibility = "hidden";
+                    loading2.style.visibility = "hidden";
+                }
+                document.getElementById("lb" + id).innerHTML = value ;
+
+            }
+
+
+
+
+
+            var obj = {};
+            obj['type'] = "Fruits";
+            $.ajax(
+                    {
+                        url: "http://ruralict.cse.iitb.ac.in/ruralict/api/products/search/byType/lcptypewiseproducts?orgabbr=lcart",
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader("Authorization", "Basic " + btoa("lokacart@cse.iitb.ac.in" + ":" + "password"));
+                        },
+                        type: "POST",
+                        data: JSON.stringify(obj),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        async: false,
+                        success: function(msg) {
+                            var x, y;
+                            var flag = 0;
+
+                            for (var i =0; i < msg['products'].length; i++)
+                            {
+
+                                var image = msg['products'][i].imageUrl;
+                                console.log(image);
+                                if (flag == 0)
+                                {
+                                    flag = 1;
+                                    var article = document.createElement('article');
+
+
+                                    var id = msg['products'][i].id;
+                                      article.innerHTML = "<div class='card' style='margin-top:50px'><header><img src='" + image + "' style='height:180px;object-fit:cover' width=100%/></header><div><p style='color:#4EAE4D;margin-left:5%;margin-top:0.5cm;font-size:large;text-overflow: ellipsis;white-space: nowrap;overflow:hidden;'>" + msg['products'][i].name + "<br><h5 style='margin-left:5%;font-size:11px;margin-top:-13px'>IIT BOMBAY</h5></p></div><footer style='padding:7px 0px'><h5 style='margin-left:55%;font-size:11px;margin-top:-13px'>Min.Order-25kg</h5><span style='margin-left:5%;font-size:13px'>1 kg for ₹"+msg['products'][i].unitRate+"</span><span id='control'><button  type='button' class='btn btn-default btn-circle'  onclick='go2(" + id + ")' id=" + msg['products'][i].id + " style='margin-left:1%; visibility: hidden; margin-left:29px;'><i class='glyphicon glyphicon-minus whiteplus' style='font-size:11px'></i></button><span><label id=lb" + msg['products'][i].id + " style='color:#4EAE4D;margin-left:2px;font-size:14px% ;visibility:hidden'>24</label><label  id=kg" + msg['products'][i].id + " style='color:#4EAE4D;visibility:hidden;font-size:14px'>kg</label></span><button type='button' class='btn btn-default btn-circle' onclick='go(" + id + ")' ><i class='glyphicon glyphicon-plus whiteplus' style='font-size:11px'></i></button></span></div></footer></div>";
+                                      console.log(article);
+                                    document.getElementById("placeholder1").appendChild(article);
+                                }
+
+                                else if (flag == 1)
+                                {
+                                    var id = msg['products'][i].id;
+                                    flag = 2;
+                                    var article2 = document.createElement("article2");
+
+                                    article2.innerHTML = "<div class='card' style='margin-top:50px'><header><img src='" + image + "' style='height:180px;object-fit:cover' width=100%/></header><div><p style='color:#4EAE4D;margin-left:5%;margin-top:0.5cm;font-size:large;text-overflow: ellipsis;white-space: nowrap;overflow:hidden;'>" + msg['products'][i].name + "<br><h5 style='margin-left:5%;font-size:11px;margin-top:-13px'>IIT BOMBAY</h5></p></div><footer style='padding:7px 0px'><h5 style='margin-left:55%;font-size:11px;margin-top:-13px'>Min.Order-25kg</h5><span style='margin-left:5%;font-size:13px'>1 kg for ₹"+msg['products'][i].unitRate+"</span><span id='control'><button  type='button' class='btn btn-default btn-circle'  onclick='go2(" + id + ")' id=" + msg['products'][i].id + " style='margin-left:1%; visibility: hidden; margin-left:29px;'><i class='glyphicon glyphicon-minus whiteplus' style='font-size:11px'></i></button><span><label id=lb" + msg['products'][i].id + " style='color:#4EAE4D;margin-left:2px;font-size:14px% ;visibility:hidden'>24</label><label  id=kg" + msg['products'][i].id + " style='color:#4EAE4D;visibility:hidden;font-size:14px'>kg</label></span><button type='button' class='btn btn-default btn-circle' onclick='go(" + id + ")' ><i class='glyphicon glyphicon-plus whiteplus' style='font-size:11px'></i></button></span></div></footer></div>";
+                                      document.getElementById("placeholder2").appendChild(article2);
+                                }
+                                else if (flag == 2)
+                                {
+                                    var id = msg['products'][i].id;
+                                    flag = 3;
+                                    var article3 = document.createElement("article3");
+
+                                   article3.innerHTML = "<div class='card' style='margin-top:50px'><header><img src='" + image + "' style='height:180px;object-fit:cover' width=100%/></header><div><p style='color:#4EAE4D;margin-left:5%;margin-top:0.5cm;font-size:large;text-overflow: ellipsis;white-space: nowrap;overflow:hidden;'>" + msg['products'][i].name + "<br><h5 style='margin-left:5%;font-size:11px;margin-top:-13px'>IIT BOMBAY</h5></p></div><footer style='padding:7px 0px'><h5 style='margin-left:55%;font-size:11px;margin-top:-13px'>Min.Order-25kg</h5><span style='margin-left:5%;font-size:13px'>1 kg for ₹"+msg['products'][i].unitRate+"</span><span id='control'><button  type='button' class='btn btn-default btn-circle'  onclick='go2(" + id + ")' id=" + msg['products'][i].id + " style='margin-left:1%; visibility: hidden; margin-left:29px;'><i class='glyphicon glyphicon-minus whiteplus' style='font-size:11px'></i></button><span><label id=lb" + msg['products'][i].id + " style='color:#4EAE4D;margin-left:2px;font-size:14px% ;visibility:hidden'>24</label><label  id=kg" + msg['products'][i].id + " style='color:#4EAE4D;visibility:hidden;font-size:14px'>kg</label></span><button type='button' class='btn btn-default btn-circle' onclick='go(" + id + ")' ><i class='glyphicon glyphicon-plus whiteplus' style='font-size:11px'></i></button></span></div></footer></div>";
+                                     document.getElementById("placeholder3").appendChild(article3);
+                                }
+                                
+                                else
+                                {
+                                     var id = msg['products'][i].id;
+                                    flag = 3;
+                                    var article4 = document.createElement("article4");
+
+                                    article4.innerHTML = "<div class='card' style='margin-top:50px'><header><img src='" + image + "' style='height:180px;object-fit:cover' width=100%/></header><div><p style='color:#4EAE4D;margin-left:5%;margin-top:0.5cm;font-size:large;text-overflow: ellipsis;white-space: nowrap;overflow:hidden;'>" + msg['products'][i].name + "<br><h5 style='margin-left:5%;font-size:11px;margin-top:-13px'>IIT BOMBAY</h5></p></div><footer style='padding:7px 0px'><h5 style='margin-left:55%;font-size:11px;margin-top:-13px'>Min.Order-25kg</h5><span style='margin-left:5%;font-size:13px'>1 kg for ₹"+msg['products'][i].unitRate+"</span><span id='control'><button  type='button' class='btn btn-default btn-circle'  onclick='go2(" + id + ")' id=" + msg['products'][i].id + " style='margin-left:1%; visibility: hidden; margin-left:29px;'><i class='glyphicon glyphicon-minus whiteplus' style='font-size:11px'></i></button><span><label id=lb" + msg['products'][i].id + " style='color:#4EAE4D;margin-left:2px;font-size:14px% ;visibility:hidden'>24</label><label  id=kg" + msg['products'][i].id + " style='color:#4EAE4D;visibility:hidden;font-size:14px'>kg</label></span><button type='button' class='btn btn-default btn-circle' onclick='go(" + id + ")' ><i class='glyphicon glyphicon-plus whiteplus' style='font-size:11px'></i></button></span></div></footer></div>";
+                                     document.getElementById("placeholder4").appendChild(article4);
+                                    flag=0;
+                                }
+
+
+                            }
+                        }
+                    }
+            );
+
+
+
+
+
+        </script>
+    </body>
+</html>

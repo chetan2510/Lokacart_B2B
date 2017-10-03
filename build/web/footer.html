@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    </head>
+    <body>
+        <br><br><br>
+        <div class="row" style="padding: 40px;">
+            <div id="footerline" style="background-color: #ccc;height: 1px;margin-bottom: 55px;margin-left: -24px;margin-right: -26px;"></div>
+            <div class="container" id='footer_container'>
+                <div class="col-sm-12 col-md-3" id="playstoref" style=" font-family: 'Roboto', sans-serif;font-size: 15px;"><strong>Download Application</strong>
+                <a href="https://play.google.com/store/apps/details?id=com.mobile.ict.lokacartplus"> <image src="playstore.png" id="playstoref1" style="width: 46%;margin-left: 0px;margin-top: 28px;"/></a>
+            </div>
+             <div class="col-sm-12 col-md-3" id="categoryf" style=" font-family: 'Roboto', sans-serif;margin-top: 1px;text-decoration: none">
+           
+                  
+                 <div id="cat"> <strong >Categories</strong></div>
+                      <ul class="category">        
+                     <li> <a href="fruit.html">Fruits</a></li>
+                     <li><a href="vegetable.html">Vegetables</a></li>
+                     <li><a href="grains.html">Grains</a></li>
+                     <li><a href="spices.html">Spices</a></li>
+                     <li><a href="dairyproducts.html">Dairy Products</a></li>
+                     <li><a href="leafy.html">Leafy Vegetables</a></li>
+                     <li><a href="exotic.html">Exotic Vegetables</a></li>
+                     <li><a href="dryfruits.html">Dry Fruits</a></li>
+                 </ul>
+                </div>
+                <div class="col-sm-12 col-md-3" id="useful" style=" font-family: 'Roboto', sans-serif;margin-top: 1px;text-decoration: none">
+                
+                    <div id="use"><strong>Useful Links</strong></div>
+                    <ul class="uselink">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="checkout.html">Orders</a></li>
+                    <li><a href="home.html">About Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                <li><a href="home.html">Videos</a></li>
+                </ul>
+        </div>
+        
+            <div class="col-sm-12 col-md-3" style=" font-family: 'Roboto', sans-serif;">
+                
+                <div id="contact"><strong>Contact Us</strong></div>
+                <a href='faq.html'><image src="phone1.png" style="width:30px;height:30px;"/></a>
+            <a target="_blank" href="https://www.facebook.com/RuralICT.iitb/"><image src="fb1.png" style="width:30px;height:30px;margin-left: 7px;"/></a><br>
+            
+                
+        
+            <input type="text" placeholder="Enter your phone" id="feedbackph" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required style="border:1px solid #ddd;margin-top: 15px;width:232px;padding: 6px 6px;"/><br>
+                   
+            <textarea rows="3" cols="30" name="comment" id="feedbacktext" placeholder="Enter your feedback" style="resize: none;margin-top: 12px;border:1px solid #ddd;padding: 6px 6px;width: 233px"></textarea><br>
+                  
+                        <input type="button" id="b7"  value="Send" onclick="feedback()" style="width: 44%;margin-left: 121px;margin-top: 10px;"/>
+            </div>
+                </div>
+            <div style='background-color: #EAE4D'></div>
+        </div>
+       
+        
+        
+        <div  style="background-color:#4EAE4D;" id="footercont">      
+             
+            <div class="container row"   style="padding: 17px 0px">
+                <div id="copy" style="float: left ;padding: 2px;margin-left: 120px">
+                    <p id="copy1" style="color: white;margin:0px; font-family: 'Roboto', sans-serif;font-size: 12px">Copyright ©2015-2017 IIT Bombay </p>
+            </div>
+            
+            <div style="float: right; padding: 2px;" id='disclaimer'>
+                <a href="terms.html"> <p id="disclaimer1" style="color:white;margin:0px; font-family: 'Roboto', sans-serif;font-size: 12px">Disclaimer | Terms and Conditions</p></a>
+            </div>
+         </div>
+        </div>
+        <script>
+            
+            function feedback()
+            {
+                var text=document.getElementById("feedbacktext").value.toString();
+                var phone=document.getElementById("feedbackph").value.toString();
+                if(text.length == ""||phone.length == "")
+                    alert("each field is required");
+                else
+                {
+                 var obj = {};
+                    
+                        obj['content']=text;            
+                        obj['phonenumber'] = phone;
+                   $.ajax(
+                                {
+                                    url: " http://ruralict.cse.iitb.ac.in/ruralict/app/lcpfeedback",
+                                    type: "POST",
+                                    data: JSON.stringify(obj),
+                                    contentType: 'application/json; charset=utf-8',
+                                    dataType: 'json',
+                                    async: false,
+                                    success: function(msg) {
+                                             alert(msg.response);
+                                             document.getElementById("feedbacktext").value="";
+                                             document.getElementById("feedbackph").value="";
+                                             
+                                    }
+                                }
+                        );
+                }
+                  
+            }
+            
+            
+        </script>
+        
+    </body>
+</html>

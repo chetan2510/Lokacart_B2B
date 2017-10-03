@@ -1,0 +1,421 @@
+<html>
+    <head>
+        <title>Order Summary</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="styling.css" rel="stylesheet" type="text/css"/>
+        
+        <script>
+            
+            function closemodal(){
+             window.location.href = "home.html";   
+            }
+            
+            function vieworder()
+            {
+               
+                 window.location.href = "checkout.html";
+            }
+            function shopmore()
+            {
+               window.location.href = "fruit.html";
+            }
+            
+            
+            
+            function checkout2()
+            {
+                       var labe=[];
+                       var products = JSON.parse(sessionStorage.products) || [];
+                       for(var i=0;i<products.length;i++)
+                       {
+                          var value = parseInt(document.getElementById("lbm"+products[i]).textContent);
+                          labe.push(value);
+                          
+                       }
+                       sessionStorage.labe = JSON.stringify(labe);
+                       //alert(parseInt(document.getElementById("total12").textContent));
+                    
+                    var checkout={};
+                    checkout['phone']=localStorage.getItem('phone1');
+                    checkout['comments']='NICE PRODUCTS';
+                    checkout['amount']=parseInt(document.getElementById("total12").textContent);
+                    checkout['address']=localStorage.getItem('address');
+                    checkout['orderItems']=[];
+                    for(var i=0;i<products.length;i++)
+                    {
+                      var elem={};
+                      var id=products[i];
+                      elem['prod_id']=id;
+                      elem['quantity']=labe[i];
+                      elem['unit_rate']=parseInt(document.getElementById("lbm5" + id).textContent);
+                      checkout['orderItems'].push(elem);
+                  }
+                    //alert(JSON.stringify(checkout));
+                    
+                    $.ajax({
+                url: 'http://ruralict.cse.iitb.ac.in/ruralict/app/addorders',
+                type: 'POST',
+                data: JSON.stringify(checkout),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'JSON',
+                async: false,
+                success: function(msg) 
+                {
+                  if(msg.status = "Success");
+                  {
+                    alert("Sucsess");
+                    localStorage.setItem('placed_flag',1);
+                    sessionStorage.clear();
+                         $('#myModal56').modal({backdrop: 'static', keyboard: false}).show();
+                  
+                  }
+                	if(msg.status=="failure")
+                	{
+                		alert(msg.error);
+                	}
+                	else if(msg.status=="price increased")
+                	{
+//                		var answer = "";
+//                		for(var i =0;i< msg.products.length;i++)
+//                		{
+//                			answer = answer + msg.products[i].name+" : "+msg.products[i].unitRate + "\n";
+//                		}
+                		alert("Price of some items have increased. The updated list is \n"+answer);
+                	}
+                	else if(msg.status=="products has been disabled"){
+                		alert(msg.error);
+                	}
+                }
+                // error: function(texterror)
+                // {
+                // 	alert("error occured");
+                // }
+            });
+            }
+            
+            
+        </script>
+       
+            
+    </head>
+    <body style="overflow: hidden">
+         <div id="header"></div>
+         
+         <center><h3 style="color: #4EAE4D">Order Summary</h3></center>
+    <br><br>
+         
+    
+    
+    <div class="container">
+             
+             
+        <div class='row'>
+                 
+        <div class="col-md-12 col-lg-8" id="order1">
+                     <article>
+                     <div id="placeholder12"></div><br>
+                     <div  style="margin-left: -14px;margin-right: -14px; background-color: #4EAE4D;color: white">Total<span id="d2" style="margin-left:581px">₹</span><label id="total12"></label></div>
+                     </article>
+                 </div>
+        
+        
+        <div id="delivery_add" class="col-md-12 col-lg-4">
+            
+        
+        <div id="a1" style="background-color: #d8ecb7;padding: 12px 28px;width: 343px;">
+            <h4 style="color: #4EAE4D;font-family: 'Roboto', sans-serif;font-size: 17px;">Delivery Address</h4>
+            <textarea rows="3" cols="30" id="addaddress" style="margin-top: 4px;border:1px solid #ddd;width: 288px;padding: 5px; resize: none;height: 100px" readonly></textarea><img id="pencil" src='pencil.png' onclick="change()" style='    width: 14px;height: 14px;margin-top: -199px;margin-left: 265px;'> <br>
+            <h4 style="color: #4EAE4D;font-family: 'Roboto', sans-serif;font-size: 17px;">Payment Mode</h4>
+            <label style="color: #888;font-size: 15px;font-family: 'Roboto', sans-serif;background-color: #ebebeb;width: 293px;padding: 10px 14px;">Cash on Delivery</label><br>
+             <h4 style="color: #4EAE4D;font-family: 'Roboto', sans-serif;font-size: 17px;">Comments</h4>
+            
+            <textarea id="comments" rows="3" cols="30" name="comment" placeholder="Write comment for order" style="margin-top: 2px;border:1px solid #ddd;width: 288px;padding: 5px;    resize: none;"></textarea><br>
+            
+            <input type="button" id="b8"  value="Place Order" onclick="checkout2()" style="width: 44%;margin-left: 1px;margin-top: 36px;margin-bottom: 13px;width: 288px;"/>
+        </div>
+            
+            
+        </div>
+                 
+            </div>
+             
+        
+             
+         </div>
+    <center>
+       
+        
+        
+        <div class="modal fade" id="myModal56" role="dialog" >
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header" id="mh3">
+                        <button type="button" class="close" data-dismiss="modal" onclick="closemodal()">&times;</button>
+                        <center> <h4 class="modal-title" style="color:#4EAE4D">Order Placed Successfully</h4></center>
+                    </div>
+                    <div class="modal-body">
+                        <img src="orderimage.jpg" style="width: 35%;" /><br>
+                        <input type="button"  id="b2v" onclick="vieworder()" value="View Order" />&nbsp;
+                        <input type="button"  id="b2s" onclick="shopmore()" value="Shop More"/>
+                        
+                    </div>
+
+                    <div class="modal-footer" id="mh4">
+                        <center>
+                        <p style="font-size: 13px; color: #888">
+                            We have placed your order. You will receive a confirmation from us shortly.<br>
+                            You can see the order status in <strong>My Orders</strong> Section.
+                        </p>
+                            </center>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        
+    </center>
+     
+         
+         
+    <div id='footer'></div>
+         
+           <script>
+    
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");     
+            </script>
+        
+        
+         <script>
+                
+                function change()
+                {
+                     window.location.href ='Edit_profile.html';
+                }
+                document.getElementById("placeholder12").innerHTML = "";
+                document.getElementById("addaddress").value =localStorage.getItem("address");
+                var k, j,rate;
+                var total=0;
+                var cart = JSON.parse(sessionStorage.cart) || [];
+                var count = JSON.parse(sessionStorage.count) || [];
+                var flag;
+                var products = [];
+
+                sessionStorage.products = JSON.stringify(products);
+                var id = cart[0];
+                products.push(id);
+                for (var i = 0; i < cart.length; i++)
+                {
+                    flag = true;
+                    id = cart[i];
+                    for (j = 0; j < products.length; j++)
+                    {
+
+                        if (cart[i] == products[j])
+                        {
+
+                            flag = false;
+                            break;
+                        }
+                    }
+
+                    if (flag == true)
+                    {
+                        products.push(id);
+                    }
+                    sessionStorage.products = JSON.stringify(products);
+                }
+                
+                 var addpro =[];
+                        sessionStorage.addpro = JSON.stringify(addpro);
+                        
+                         for (var i = 0; i < products.length; i++)
+                {
+                     
+                 var num=0;
+                    for (j = 0; j < cart.length; j++)
+                    {
+
+                        if (cart[j] == products[i])
+                        {
+                               num++;
+                        }
+                    }
+                       addpro.push(num);
+                   
+                     sessionStorage.addpro = JSON.stringify(addpro);
+                }
+
+                $.ajax(
+                        {
+                            url: "http://ruralict.cse.iitb.ac.in/ruralict/api/products/search/byType/lcpmapnew?orgabbr=lcart",
+                            beforeSend: function(xhr) {
+                                xhr.setRequestHeader("Authorization", "Basic " + btoa("lokacart@cse.iitb.ac.in" + ":" + "password"));
+                            },
+                            type: "GET",
+                            contentType: 'application/json; charset=utf-8',
+                            crossDomain: true,
+                            dataType: 'json',
+                            async: false,
+                            success: function(msg) {
+                                /*$.each( msg.products[0].Vegetabels,function(key,value) {
+                                 console.log(value.name);
+                                 
+                                 });*/
+                                var x,y;
+                                var flag = 0;
+                                var item = [];
+                                var total=0;
+                                for (k = 0; k < products.length; k++)
+                                {
+                                    for (var i = 0; i < msg['products'].length; i++)
+                                    {
+                                        //console.log(item[i]);
+                                        for (x in msg['products'][i])
+                                        {
+                                            //  console.log(x);
+                                            if ((x != "productTypeId") && (x != "status") && (x != "typename"))
+                                            {
+                                                for (y in msg['products'][i][x])
+                                                {
+                                                    //console.log(item['products'][i][x][y].name);
+
+                                                    //console.log(msg['products'][i][x][y].name);
+                                                    var image = msg['products'][i][x][y].imageUrl;
+                                                    var id = msg['products'][i][x][y].id;
+                                                     var addpro = JSON.parse(sessionStorage.addpro) || [];
+    
+                                                     if (id == products[k])
+                                                    {
+                                                        var num=24+addpro[k];
+                                                        var article1 = document.createElement("article");
+                                                        var price=msg['products'][i][x][y].unitRate*num;
+                                                        article1.innerHTML = "<div class='row' id="+id+"><div class='col-sm-3' style='margin-left: 25px;'><img id='d3' style='height:122px; width:122px;margin-top: 28px;object-fit:cover' src='" + image + "' width=100%/></div><div id='d4' class='col-sm-5' style='object-fit:cover;margin-left: 8px;text-align:left;'><h5 id='prod_name' style='color:#4EAE4D;margin-top: 26px;font-weight: 500;'>" + msg['products'][i][x][y].name + "</h5><h5 style='margin-top: -7px;color: #4eae4d;font-size: 11px; font-family: 'Roboto', sans-serif;'>IIT BOMBAY</h5><br><h5 id='min_order' style='margin-top: 16px;font-size: 12px;font-weight: 500;color: #555;margin-bottom: 3px; font-family: 'Roboto', sans-serif'>Min order: 25kg</h5><button type='button' onclick='dec(" + id + ")'id=mm" + msg['products'][i][x][y].id + " class='btn btn-default btn-circle' style='background-color:#4EAE4D; margin-left:1%;'><i class='glyphicon glyphicon-minus whiteplus' style='font-size:11px;color: white;'></i></button><span><label id=lbm" + msg['products'][i][x][y].id + " style='color:#4EAE4D;margin-left:2%;padding: 2px;font-size: 13px;'>"+num+"kg</label></span><button onclick='inc(" + id + ")' type='button' class='btn btn-default btn-circle' style='background-color:#4EAE4D;margin-left:1%'><i class='glyphicon glyphicon-plus whiteplus' style='font-size:11px;color: white;'></i></button><span id='unit_rate' style='margin-left:12%;font-size: 14px;'>x &nbsp; ₹<label style='color: #555;font-weight: 400;font-family: 'Roboto', sans-serif;' id='lbm5"+id+"'>"+ msg['products'][i][x][y].unitRate +" </label></span></span></div><div id='d5'><span id='rs' style='margin-left: 95px;font-size: 16px;color: #4EAE4D;margin-top: 124px;position: absolute;'>₹</span><label style='margin-top: 122px;margin-left: 106px;font-weight: 500;color: #4eae4d; font-family: Roboto, sans-serif' id='lbm2" + id + "'>"+price+"</label></div><div><img id='d1' src='delete.png' onclick='del2("+id+")' style='width: 15px;margin-left: 662px;margin-top: -130px;height: 15px;'></div></div><br><br>";
+//                                                        document.getElementById("placeholder12").appendChild(article);
+                                                            console.log(article1);
+                                                            $("#placeholder12").html(article1);
+                                                        var total=total+price;
+                                                        
+                                                    }
+                                                document.getElementById("total12").innerHTML=total;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                             
+                     
+             
+
+                            }
+
+                        });
+                         
+                    
+
+
+            
+
+            function dec(id)
+            {
+                var value = parseInt(document.getElementById("lbm" + id).textContent);
+                var rate = parseInt(document.getElementById("lbm2" + id).textContent);
+                var price = parseInt(document.getElementById("lbm5" + id).textContent);
+ 
+                
+                var total=0;
+                if (value != 25)
+                {
+                    value = value -1;
+                    rate = value * price;
+                    document.getElementById("lbm" + id).innerHTML = value;
+                    document.getElementById("lbm2" + id).innerHTML = rate;
+                       var product = JSON.parse(sessionStorage.products) || [];
+                       for(var i=0;i<product.length;i++)
+                       {
+                            rate = parseInt(document.getElementById("lbm2"+product[i]).textContent);
+                           total=total+rate;
+                       }
+                       
+                       document.getElementById("total12").innerHTML = total;
+                }
+               
+            }
+            function inc(id)
+            {
+              // alert("hello");
+                var rate = parseInt(document.getElementById("lbm2" + id).textContent);
+                var price = parseInt(document.getElementById("lbm5" + id).textContent);
+                var value = parseInt(document.getElementById("lbm" + id).textContent);
+                var total=0;
+                value = value +1;
+                rate = value * price;
+                document.getElementById("lbm" + id).innerHTML = value;
+                document.getElementById("lbm2" + id).innerHTML = rate;
+                var product = JSON.parse(sessionStorage.products) || [];
+                       for(var i=0;i<product.length;i++)
+                       {
+                            rate = parseInt(document.getElementById("lbm2"+product[i]).textContent);
+                             total = total + parseInt(document.getElementById("lbm2"+product[i]).textContent);
+                             //alert(total);
+                       }
+                      document.getElementById("total12").innerHTML = total;
+                    
+            }
+            
+            function del2(id)
+            {
+                 var rate = parseInt(document.getElementById("lbm2" + id).textContent);
+                var price = parseInt(document.getElementById("lbm5" + id).textContent);
+                var value = parseInt(document.getElementById("lbm" + id).textContent);
+                var total=parseInt(document.getElementById("total").textContent);
+                rate=value*price;
+                total=total-rate;
+                 document.getElementById("total").innerHTML = total;
+                var id1=id;
+                var products = JSON.parse(sessionStorage.products) || [];
+                var cart = JSON.parse(sessionStorage.cart) || [];
+                
+                for(var i=0;i<cart.length;i++)
+                {
+                   
+                    if(cart[i] == id)
+                    {  
+                       cart.splice(i,1);
+                        i--;
+                    }
+                } 
+                for(var i=0;i<products.length;i++)
+                {
+                    if(products[i] == id)
+                    products.splice(i,1);
+                }
+                
+                
+                sessionStorage.cart = JSON.stringify(cart);
+                sessionStorage.products = JSON.stringify(products);
+                 var count = products.length;
+                 sessionStorage.count = JSON.stringify(count); 
+                  document.getElementById("count").innerHTML = count;
+                   $('#'+id1+'').remove();
+                   if(count == 0)
+                        window.location.href = "home.html";
+                    window.location.href = "ordersummary.html";
+            }
+            
+
+        </script>
+            
+        
+        
+    </body>
+</html>

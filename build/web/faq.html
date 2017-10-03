@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>FAQ</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+        <link href="styling.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+       
+        <script>
+           function toggleIcon(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-plus glyphicon-minus');
+}
+$('.panel-group').on('hidden.bs.collapse', toggleIcon);
+$('.panel-group').on('shown.bs.collapse', toggleIcon);
+
+            
+        </script>
+       
+    </head>
+    <body style="overflow: hidden">
+        <div id="header"></div><br><br>
+    
+    
+      
+    <div class="container" id="faqcontainer">
+
+    <div id="faqcontact" class="col-sm-12 col-md-4" style="margin-top: 0px">
+        <h4 style="color: #4EAE4D">Contact Us</h4><br>
+        <div style="color: #888">
+            You can directly get in touch with us via:<br>
+            9773232509 / 9819411815 / 0222-5767728<br><br>
+            <a id="dialerfaq" href="tel:555-123-4567"><image src="phone1.png" style="width:30px;height:30px;"/></a>
+            <a target="_blank" href="https://www.facebook.com/RuralICT.iitb/"><image src="fb1.png" style="width:30px;height:30px;margin-left: 5px;"/></a><br><br>
+        </div>
+        <div id="feedbackbackground" style="background-color: #d8ecb7;padding: 12px 28px;">
+            <h4 style="color: #4EAE4D">Feedback</h4>
+            <input type="text" id="faqin" placeholder="Enter your Email" required style="border:1px solid #ddd;margin-top: 15px;width:289px;padding: 5px;" />
+            <textarea rows="3" id="faqtext" cols="30" name="comment" placeholder="Enter your feedback" style="margin-top: 25px;border-color: #ddd;width: 288px;padding: 5px;    resize: none;"></textarea>
+            <input type="button" id="b8"  value="Send" style="width: 44%;margin-left: 70px;margin-top: 23px;"/>
+        </div>
+    </div>
+    
+    
+        <div id="faqcontent" class="col-sm-12 col-md-8" >
+<!--    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="more-less glyphicon glyphicon-plus"></i>
+                        Registration
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <i class="more-less glyphicon glyphicon-plus"></i>
+                        Registration
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <i class="more-less glyphicon glyphicon-plus"></i>
+                        Registration
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+
+    </div> panel-group -->
+
+<h3 style="color: #4EAE4D">F.A.Q.</h3>
+<button class="accordion">Registration</button>
+<div class="panelfaq">
+    <p style="margin-top: 3px">
+        <br> <strong> Q1.How do I register?</strong><br>
+Registration process is a one step process. You need to download the application from playstore and fill the form which asks for the details like First Name, Last Name, Address, Email Id, Pincode etc. 
+<br><br>
+    <strong>Q2. Can I explore the application without login?</strong>
+<br>
+Yes, you can view our products withoutto register logging into the application. However, for buying or any kind of transaction, you will have to register / login 
+<br> <br>
+    <strong>Q3. When can I start using application after the registration?</strong>
+<br>
+You can start using the application immediately, once you register yourself. 
+<br> <br>
+<strong>Q4. What details do I have to give you for registration?</strong>
+<br>
+In registration form, you have to fill your First Name, Last Name, Contact Number, Email Id, Address, Pincode. <br><br>
+    <strong>Q5. Can I change my mobile number after the registration?</strong>
+<br>
+No, mobile number is used as the primary identification for this application. So you cannot change your registered mobile number as of now. We have been developing this feature to change mobile no. after registration. 
+<br><br>
+<strong>Q6. Are there any charges for registration?</strong>
+<br>
+No, there are no charges for registration. 
+<br><br>
+        
+    </p>
+</div>
+
+<button class="accordion">Login and Password</button>
+<div class="panelfaq">
+    <p style="margin-top: 3px">
+        <br>
+        <strong>Q1. How do I reset my password?</strong><br>
+
+You can reset your password from the profile tab in left navigation drawer. 
+<br><br> 
+    <strong>Q2. Can I change my mobile number for login?</strong>
+    <br>
+No, once your mobile number is registered with one account then you cannot change that number. We have been developing this feature to change mobile no. after registration.
+<br><br>
+    <strong>Q3. Can I use multiple numbers to login?</strong>
+    <br>
+You can create multiple accounts with different numbers. However, you cannot use the same number for multiple accounts. 
+<br><br>
+    </p>
+</div>
+
+
+<button class="accordion">Shopping and Payment</button>
+<div class="panelfaq">
+    <p style="margin-top: 3px">
+        <br>
+        <strong>Q1. How can I purchase goods from Lokacart plus application?</strong>
+        <br>
+Browse the product categories given on top to find the product of your choice. You can also search and apply filter according to your preference on selected product. By clicking on '+', you can directly add product to cart. On the right side of screen, a cart icon will appear, by clicking on which you will be able to see the item’s details added in cart. 
+<br><br>
+<strong>Q2. How do I pay for my order?</strong>
+<br>
+Payment is to be made in cash only on delivery of the order. 
+<br><br>
+    <strong>Q3. What is Minimum Order Quantity (MOQ)?</strong>
+    <br>
+MOQ refers to minimum amount of product quantity which you need to buy from the seller. 
+<br><br>
+    <strong>Q4. Can I buy less than MOQ?</strong>
+    <br>
+No, as MOQ is set by product seller and cannot be changed. 
+<br><br>
+    <strong>Q5. Why Logistic support is not available in some product?</strong>
+    <br>
+The availability of the logistic support is completely dependent on the seller. It is seller's choice to provide logistic support for the product. 
+<br><br>
+    <strong>Q6.How does COD (Cash-On-Delivery) work?</strong>
+    <br>
+We offer COD to make delivery and payment process simple. In COD, you have to make payment at the time of delivery of product. 
+<br><br>
+    <strong>Q7.Do I get an invoice for my order?</strong>
+    <br>
+Yes, you will receive an invoice of your orders on your email ID and printed bill will be received at the time of delivery. 
+<br><br>
+    <strong>Q8.Is it safe to use my credit/debit card on Lokacart Plus?</strong>
+    <br>
+Yes, it is safe to use your credit/debit card on Lokacart Plus. 
+<br><br>
+    </p>
+</div>
+
+
+
+
+<button class="accordion">Order</button>
+<div class="panelfaq">
+    <p style="margin-top: 3px">
+        <br>
+        <strong>Q1.Can I modify/cancel an order once I have placed it? </strong>
+        <br> 
+Yes, you can still modify your order once it has been placed. However, once the order has been processed from the admin, upon which an order processed notification will be sent to your registered phone number, no further changes can be made in order. 
+<br><br>
+    <strong>Q2.What if products ordered by me are out of stock?</strong>
+    <br>
+In a rare case, where products ordered by you are out of stock, we would be sending you a notification stating the status of the product. 
+<br><br>
+    <strong>Q3.Is it possible to order an item which is out of stock?</strong>
+    <br>
+No, you cannot order products which are out of stock. We are planning to have feature in our next version where you can generate your demand if the product is not available in stock while placing a order. 
+<br><br>
+<strong>Q4.How do I check the current status of my order?</strong>
+<br>
+You can check your order status from order section in left navigation drawer. 
+<br><br> 
+    <strong>Q5.How can I check my previous order history?</strong>
+    <br>
+Swipe left on the dashboard to obtain the navigation drawer that contains \“Orders\”. Order history of all orders formerly placed can be viewed on the \“Processed Orders\” screen.\“Processed Orders\” is listed under \“Orders\”. 
+<br><br>
+    </p>
+</div>
+
+
+
+
+<button class="accordion">Deliver</button>
+<div class="panelfaq">
+    <p style="margin-top: 3px">
+        <br>
+        <strong>Q1.When will I receive my order?</strong>
+        <br>
+Once you are done with placing your order, you will be able to see your order status from 'orders' in left navigation drawer. The delivery time will be decided by the admin while processing your order. We will notify the delivery time once it is processed by admin. 
+<br><br>
+    <strong>Q2.How do I change the delivery info (address to which I want products delivered)? </strong>
+    <br>
+You can change your address from the checkout page while checking out the order. 
+<br><br>
+    </p>
+</div>
+
+
+<button class="accordion">Account Settings</button>
+<div class="panelfaq">
+    <p style="margin-top: 3px">
+        <br>
+        <strong>Q1.How can I change my profile details? </strong>
+        <br>
+        You can change your profile details from ‘profile’ section from left navigation drawer. You can also change your details by clicking on ‘pen’ icon on the left navigation drawer. This enables you to edit your first and last names, address, pincode and email Id. <br><br>
+    <strong>Q2.Can I change my email id? </strong>
+    <br>
+Yes, you can change your email Id from the profile section in left navigation drawer. Once you change your email Id, you will receive a verification email from our side. On verification, you will start receiving emails for your order from Lokacart Plus. 
+<br><br>
+    <strong>Q3.Can I change my mobile number?</strong>
+    <br>
+No, you cannot change your mobile number as it is permanently registered with us. We have been developing this feature to change mobile no. after registration. 
+<br><br> 
+    </p>
+</div>
+
+
+<button class="accordion">Feedback</button>
+<div class="panelfaq">
+    <p style="margin-top: 3px">
+        <br>
+        <strong>Q1.I had an issue with your service. Who do I get in touch with? </strong>
+        <br>
+Please feel free to contact us. Use the links on the \“Contact Us\” section under \“Help\” or contact us on lokacart@cse.iitb.ac.in. For issues regarding services related to specific organizations or products on Lokacart, please refer to their respective homepages. A satisfied customer is our hope and pride. 
+<br><br>
+    </p>
+</div>
+
+
+<button class="accordion">Others</button>
+<div class="panelfaq">
+    <p style="margin-top: 3px">
+        <br>
+        <strong>Q1.Product images are taking a lot of time to load. What can I do? </strong>
+        <br>
+Check network connectivity & try reconnecting. If the problem still persists, contact us on lokacart@cse.iitb.ac.in 
+<br><br>
+<strong>Q2.Which android devices are supported by Lokacart? </strong>
+<br>
+Android version 4.0 and higher. 
+<br><br> 
+    </p>
+</div>
+
+
+        
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+     
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  }
+}
+</script>
+    </div>
+    
+</div><!-- container -->
+        
+        
+        <div id ="footer"></div>
+        
+        <script>
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+        </script>
+    </body>
+    
+</html>
